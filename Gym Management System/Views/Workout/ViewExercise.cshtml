@@ -1,0 +1,67 @@
+﻿@*
+    List out recipes
+*@
+@{
+}
+
+@model IEnumerable<GymManagementSystem.Models.Exercise>
+
+@{
+    ViewData["Title"] = "Exercise";
+}
+
+<h1>@ViewBag.workoutType's Exercises  </h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Picture)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Sets)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Weight)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                <img src="@item.Picture" style="height:128px;" />
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+
+            <td>
+                @Html.DisplayNameFor(model => model.Sets)
+            </td>
+            <td>
+                @Html.DisplayNameFor(model => model.Weight)
+            </td>
+            <td>
+                @Html.DisplayNameFor(model => model.Status)
+            </td>
+            
+
+        </tr>
+        }
+    </tbody>
+</table>

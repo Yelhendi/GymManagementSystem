@@ -1,0 +1,71 @@
+﻿@*
+    List out recipes
+*@
+@{
+}
+
+@model IEnumerable<GymManagementSystem.Models.Exercise>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Picture)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sets)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Weight)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Picture)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Weight)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sets)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Update", new { id = item.ExerciseId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ExerciseId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ExerciseId })|
+                @Html.ActionLink("View Exercise", "ViewExercise", new { id = item.ExerciseId })|
+                @Html.ActionLink("Add Exercise", "CreateExercise", new { WorkoutId = item.ExerciseId })
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
