@@ -37,30 +37,6 @@ namespace GymManagementSystem.Controllers
             return View(exerciseById);
         }
 
-        //CREATE Exercise
-        //make it create from form
-        //public IActionResult CreateExercise()
-        //{
-        //    return View();
-        //}
-        //[HttpPost] //sending data 
-        //public IActionResult Create(AddExerciseBindingModel bindingModel)
-        //{
-        //    var ExerciseToCreate = new Exercise
-        //    {
-        //        Name = bindingModel.Name,
-        //        Picture = bindingModel.Picture,
-        //        Sets = bindingModel.Sets,
-        //        Weight = bindingModel.Weight,
-        //        Status = (Models.Status)bindingModel.Status
-        //};
-        //    dbContext.Exercises.Add(ExerciseToCreate);
-        //    //save changes
-        //    dbContext.SaveChanges();
-        //    //return to action
-        //    return RedirectToAction("Index");
-        //}
-
         ////add route
 
         [Route("update/{id:int}")]

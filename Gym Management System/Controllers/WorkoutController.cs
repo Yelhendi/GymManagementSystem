@@ -120,7 +120,7 @@ namespace GymManagementSystem.Controllers
             var ExerciseToCreate = new Exercise
             {
                 Name = bindingModel.Name,
-                Picture = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHgNMJAXVs5aU1iyPQxvD9UhKKB70qHp1Vbg&usqp=CAU",
+                Picture = "https://cdn.thespaces.com/wp-content/uploads/2020/01/Gymshark-hero-crop.jpg",
                 Sets = bindingModel.Sets,
                 Weight = bindingModel.Weight,
                 Status = (Models.Status)bindingModel.Status,
@@ -128,6 +128,7 @@ namespace GymManagementSystem.Controllers
                 Workout = dbContext.Workouts.FirstOrDefault(w => w.WorkoutId == WorkoutId),
 
             };
+
             dbContext.Exercises.Add(ExerciseToCreate);
             //save changes
             dbContext.SaveChanges();

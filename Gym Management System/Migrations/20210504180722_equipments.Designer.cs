@@ -3,19 +3,45 @@ using System;
 using GymManagementSystem.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GymManagementSystem.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210504180722_equipments")]
+    partial class equipments
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 64)
                 .HasAnnotation("ProductVersion", "5.0.0");
+
+            modelBuilder.Entity("GymManagementSystem.Models.Equipment", b =>
+                {
+                    b.Property<int>("EquipmentId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int?>("EquipmentId1")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<int?>("WorkoutId")
+                        .HasColumnType("int");
+
+                    b.HasKey("EquipmentId");
+
+                    b.HasIndex("EquipmentId1");
+
+                    b.HasIndex("WorkoutId");
+
+                    b.ToTable("Equipment");
+                });
 
             modelBuilder.Entity("GymManagementSystem.Models.Exercise", b =>
                 {
@@ -60,9 +86,6 @@ namespace GymManagementSystem.Migrations
                     b.Property<int>("Difficulty")
                         .HasColumnType("int");
 
-                    b.Property<string>("Equipment")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
                     b.Property<int>("Time")
                         .HasColumnType("int");
 
@@ -77,6 +100,17 @@ namespace GymManagementSystem.Migrations
                     b.HasIndex("WorkoutId1");
 
                     b.ToTable("Workouts");
+                });
+
+            modelBuilder.Entity("GymManagementSystem.Models.Equipment", b =>
+                {
+                    b.HasOne("GymManagementSystem.Models.Equipment", null)
+                        .WithMany("Equpments")
+                        .HasForeignKey("EquipmentId1");
+
+                    b.HasOne("GymManagementSystem.Models.Workout", null)
+                        .WithMany("Equipments")
+                        .HasForeignKey("WorkoutId");
                 });
 
             modelBuilder.Entity("GymManagementSystem.Models.Exercise", b =>
@@ -95,8 +129,15 @@ namespace GymManagementSystem.Migrations
                         .HasForeignKey("WorkoutId1");
                 });
 
+            modelBuilder.Entity("GymManagementSystem.Models.Equipment", b =>
+                {
+                    b.Navigation("Equpments");
+                });
+
             modelBuilder.Entity("GymManagementSystem.Models.Workout", b =>
                 {
+                    b.Navigation("Equipments");
+
                     b.Navigation("Workouts");
                 });
 #pragma warning restore 612, 618

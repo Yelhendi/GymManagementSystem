@@ -10,6 +10,7 @@ namespace GymManagementSystem.Models.Binding
     {
         public int WorkoutId { get; set; }
         public string Type { get; set; }
+     
         public Difficulty Difficulty { get; set; }
         public int Time { get; set; }
         public DateTime CreatedAt { get; set; }

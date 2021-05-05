@@ -12,9 +12,7 @@
 
 <h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+
 <table class="table">
     <thead>
         <tr>
@@ -47,7 +45,7 @@
             </td>
 
             <td>
-                @Html.DisplayFor(modelItem => item.Picture)
+                <img src = "@item.Picture" style="height:128px;"/>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Weight)
@@ -62,8 +60,8 @@
                 @Html.ActionLink("Edit", "Update", new { id = item.ExerciseId }) |
                 @Html.ActionLink("Details", "Details", new { id = item.ExerciseId }) |
                 @Html.ActionLink("Delete", "Delete", new { id = item.ExerciseId })|
-                @Html.ActionLink("View Exercise", "ViewExercise", new { id = item.ExerciseId })|
-                @Html.ActionLink("Add Exercise", "CreateExercise", new { WorkoutId = item.ExerciseId })
+                @*@Html.ActionLink("View Workout", "Details","Workout", new { id = item.Workout.WorkoutId })|*@
+               
             </td>
         </tr>
         }
