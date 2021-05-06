@@ -133,13 +133,14 @@ namespace GymManagementSystem.Controllers
             bindingModel.WorkoutId = WorkoutId;
             var ExerciseToCreate = new Exercise
             {
+                WorkoutId = WorkoutId,
                 Name = bindingModel.Name,
                 Picture = "https://cdn.thespaces.com/wp-content/uploads/2020/01/Gymshark-hero-crop.jpg",
                 Sets = bindingModel.Sets,
                 Weight = bindingModel.Weight,
                 Status = (Models.Status)bindingModel.Status,
                 //Recipe mapped to that will be 
-                Workout = repository.Workouts.FindByCondition(w => w.WorkoutId == WorkoutId).FirstOrDefault(),
+               // Workout = repository.Workouts.FindByCondition(w => w.WorkoutId == WorkoutId).FirstOrDefault(),
                 //Workout = dbContext.Workouts.FirstOrDefault(w => w.WorkoutId == WorkoutId),
 
             };
@@ -161,13 +162,14 @@ namespace GymManagementSystem.Controllers
             bindingModel.WorkoutId = WorkoutId;
             var ExerciseToCreate = new Exercise
             {
+                WorkoutId = WorkoutId,
                 Name = bindingModel.Name,
                 Picture = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHgNMJAXVs5aU1iyPQxvD9UhKKB70qHp1Vbg&usqp=CAU",
                 Sets = bindingModel.Sets,
                 Weight = bindingModel.Weight,
                 Status = (Models.Status)bindingModel.Status,
                 //Recipe mapped to that will be 
-                Workout = repository.Workouts.FindByCondition(w => w.WorkoutId == WorkoutId).FirstOrDefault(),
+                //Workout = repository.Workouts.FindByCondition(w => w.WorkoutId == WorkoutId).FirstOrDefault(),
                 // Workout = dbContext.Workouts.FirstOrDefault(w => w.WorkoutId == WorkoutId),
 
             };
@@ -184,7 +186,7 @@ namespace GymManagementSystem.Controllers
         {
             var Workouts = repository.Workouts.FindByCondition(w => w.WorkoutId == id).FirstOrDefault();
             //var Workouts = dbContext.Workouts.FirstOrDefault(w => w.WorkoutId == id);
-            var Exercises = repository.Exercises.FindByCondition(W => W.Workout.WorkoutId == id);
+            var Exercises = repository.Exercises.FindByCondition(W => W.WorkoutId == id);
             //var Exercises = repository.Exercises.FindByCondition(w => w.Workout.WorkoutId == id).FirstOrDefault();
             //var Exercises = dbContext.Exercises.Where(w => w.Workout.WorkoutId == id).ToList();
             ViewBag.WorkoutType = Workouts.Type;

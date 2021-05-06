@@ -13,6 +13,7 @@ namespace GymManagementSystem.Models
         public int Sets { get; set; }
         public int Weight { get; set; }
         public Status Status { get; set; }
+        public int WorkoutId { get; set; }
 
 
         //Connect workout and Exercises
