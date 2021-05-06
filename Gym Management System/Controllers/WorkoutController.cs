@@ -1,4 +1,5 @@
 ﻿using GymManagementSystem.Data;
+using GymManagementSystem.Interfaces;
 using GymManagementSystem.Models;
 using GymManagementSystem.Models.Binding;
 using Microsoft.AspNetCore.Mvc;
@@ -15,17 +16,20 @@ namespace GymManagementSystem.Controllers
     {
         //Inject applicationdb context readonly means it will not change
         //Create constructor
-        private readonly AppDbContext dbContext;
-        public WorkoutController(AppDbContext appDbContext)
+        // private readonly AppDbContext dbContext;
+        private IRepositoryWrapper repository;
+        public WorkoutController(/*AppDbContext appDbContext*/ IRepositoryWrapper repositoryWrapper)
         {
-            dbContext = appDbContext;
+            //dbContext = appDbContext;
+            repository = repositoryWrapper;
         }
         //READ
         [Route("")]
 
         public IActionResult Index()
         {
-            var allWorkouts = dbContext.Workouts.ToList();
+            var allWorkouts = repository.Workouts.FindAll();
+            // var allWorkouts = dbContext.Workouts.ToList();
             return View(allWorkouts);
         }
         //Route is a placeholder that maps directly to what you are putting in
@@ -35,7 +39,8 @@ namespace GymManagementSystem.Controllers
         //goes to get recipe that has specific Id
         public IActionResult Details(int id)
         {
-            var workoutById = dbContext.Workouts.FirstOrDefault(w => w.WorkoutId == id);
+            var workoutById = repository.Workouts.FindByCondition(w => w.WorkoutId == id).FirstOrDefault();
+            //var workoutById = dbContext.Workouts.FirstOrDefault(w => w.WorkoutId == id);
             return View(workoutById);
         }
 
@@ -58,20 +63,22 @@ namespace GymManagementSystem.Controllers
                 CreatedAt = DateTime.Now
             };
 
-            dbContext.Workouts.Add(workoutToCreate);
+            repository.Workouts.Create(workoutToCreate);
+            //dbContext.Workouts.Add(workoutToCreate);
             //save changes
-            dbContext.SaveChanges();
+            repository.Save();
             //return to action
             return RedirectToAction("Index");
         }
 
         //UPDATE
 
-      
+
         [Route("update/{id:int}")]
         public IActionResult Update(int id)
         {
-            var workoutById = dbContext.Workouts.FirstOrDefault(w => w.WorkoutId == id);
+            var workoutById = repository.Workouts.FindByCondition(w => w.WorkoutId == id).FirstOrDefault();
+            //var workoutById = dbContext.Workouts.FirstOrDefault(w => w.WorkoutId == id);
             return View(workoutById);
         }
 
@@ -80,11 +87,13 @@ namespace GymManagementSystem.Controllers
         [Route("update/{id:int}")]
         public IActionResult Update(Workout workout, int id)
         {
-            var workoutToUpdate = dbContext.Workouts.FirstOrDefault(w=>w.WorkoutId == id );
+            var workoutToUpdate = repository.Workouts.FindByCondition(w => w.WorkoutId == id).FirstOrDefault();
+            //var workoutToUpdate = dbContext.Workouts.FirstOrDefault(w=>w.WorkoutId == id );
             workoutToUpdate.Type = workout.Type;
             workoutToUpdate.Difficulty = workout.Difficulty;
             workoutToUpdate.Time = workout.Time;
-            dbContext.SaveChanges();
+            repository.Save();
+            //dbContext.SaveChanges();
             return RedirectToAction("Index");
 
         }
@@ -93,9 +102,12 @@ namespace GymManagementSystem.Controllers
         [Route("delete/{id:int}")]
         public IActionResult Delete(int id)
         {
-            var workoutToDelete = dbContext.Workouts.FirstOrDefault(w => w.WorkoutId == id);
-            dbContext.Workouts.Remove(workoutToDelete);
-            dbContext.SaveChanges();
+            var workoutToDelete = repository.Workouts.FindByCondition(w => w.WorkoutId == id).FirstOrDefault();
+            //var workoutToDelete = repository.Workouts.FirstOrDefault(w => w.WorkoutId == id);
+            repository.Workouts.Delete(workoutToDelete);
+            // dbContext.Workouts.Remove(workoutToDelete);
+            repository.Save();
+            //dbContext.SaveChanges();
             return RedirectToAction("Index");
         }
 
@@ -106,8 +118,10 @@ namespace GymManagementSystem.Controllers
         ///
         [Route("addExercise/{WorkoutId:int}")]
         public IActionResult CreateExercise(int WorkoutId)
+
         {
-            var Workout = dbContext.Workouts.FirstOrDefault(w => w.WorkoutId == WorkoutId);
+            var Workout = repository.Workouts.FindByCondition(w => w.WorkoutId == WorkoutId).FirstOrDefault();
+            //var Workout = dbContext.Workouts.FirstOrDefault(w => w.WorkoutId == WorkoutId);
             //return Exercise property 
             ViewBag.WorkoutType = Workout.Type;
             return View();
@@ -125,19 +139,21 @@ namespace GymManagementSystem.Controllers
                 Weight = bindingModel.Weight,
                 Status = (Models.Status)bindingModel.Status,
                 //Recipe mapped to that will be 
-                Workout = dbContext.Workouts.FirstOrDefault(w => w.WorkoutId == WorkoutId),
+                Workout = repository.Workouts.FindByCondition(w => w.WorkoutId == WorkoutId).FirstOrDefault(),
+                //Workout = dbContext.Workouts.FirstOrDefault(w => w.WorkoutId == WorkoutId),
 
             };
-
-            dbContext.Exercises.Add(ExerciseToCreate);
+            repository.Exercises.Create(ExerciseToCreate);
+            // dbContext.Exercises.Add(ExerciseToCreate);
             //save changes
-            dbContext.SaveChanges();
+            repository.Save();
+            // dbContext.SaveChanges();
             //return to action
             return RedirectToAction("Index");
         }
         //[Route("{id:int}/Exercises")]
         //update
-       
+
         [HttpPost] //sending data 
         [Route("addExercises/{WorkoutId:int}")]
         public IActionResult CreateExercises(AddExerciseBindingModel bindingModel, int WorkoutId)
@@ -151,33 +167,29 @@ namespace GymManagementSystem.Controllers
                 Weight = bindingModel.Weight,
                 Status = (Models.Status)bindingModel.Status,
                 //Recipe mapped to that will be 
-                Workout = dbContext.Workouts.FirstOrDefault(w => w.WorkoutId == WorkoutId),
+                Workout = repository.Workouts.FindByCondition(w => w.WorkoutId == WorkoutId).FirstOrDefault(),
+                // Workout = dbContext.Workouts.FirstOrDefault(w => w.WorkoutId == WorkoutId),
 
             };
-            dbContext.Exercises.Add(ExerciseToCreate);
+            repository.Exercises.Create(ExerciseToCreate);
+            //dbContext.Exercises.Add(ExerciseToCreate);
             //save changes
-            dbContext.SaveChanges();
+            repository.Save();
+            // dbContext.SaveChanges();
             //return to action
             return RedirectToAction("Index");
         }
         [Route("{id:int}/Exercises")]
         public IActionResult ViewExercise(int id)
         {
-            var Workouts = dbContext.Workouts.FirstOrDefault(w => w.WorkoutId == id);
-            var Exercises = dbContext.Exercises.Where(w => w.Workout.WorkoutId == id).ToList();
+            var Workouts = repository.Workouts.FindByCondition(w => w.WorkoutId == id).FirstOrDefault();
+            //var Workouts = dbContext.Workouts.FirstOrDefault(w => w.WorkoutId == id);
+            var Exercises = repository.Exercises.FindByCondition(W => W.Workout.WorkoutId == id);
+            //var Exercises = repository.Exercises.FindByCondition(w => w.Workout.WorkoutId == id).FirstOrDefault();
+            //var Exercises = dbContext.Exercises.Where(w => w.Workout.WorkoutId == id).ToList();
             ViewBag.WorkoutType = Workouts.Type;
             return View(Exercises);
-
         }
-        
-        //[Route("addvisit/{workoutId:int}")]
-        //public IActionResult CreateVisit(int workoutID)
-        //{
-        //    var workout = dbContext.Workouts.FirstOrDefault(w => w.WorkoutId == workoutID);
-        //    ViewBag.WorkoutType = workout.Type;
 
-        //    var pageInject = new AddVisitBindingModel { Vets = dbContext.Vets.ToList().GetViewModels() };
-        //    return View(pageInject);
-        //}
+       }
     }
-}
