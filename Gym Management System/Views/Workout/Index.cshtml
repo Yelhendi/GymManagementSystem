@@ -34,26 +34,28 @@
     <tbody>
         @foreach (var item in Model)
         {
-        <tr>
+            <tr>
 
-            <td>
-                @Html.DisplayFor(modelItem => item.Type)
-            </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Type)
+                </td>
 
-            <td>
-                @Html.DisplayFor(modelItem => item.Difficulty)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Time)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Update", new { id = item.WorkoutId }) |
-                @Html.ActionLink("Details", "Details", new { id = item.WorkoutId }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.WorkoutId })|
-                @Html.ActionLink("View Exercise", "ViewExercise", new { id = item.WorkoutId })|
-                @Html.ActionLink("Add Exercise", "CreateExercise", new { WorkoutId = item.WorkoutId })
-            </td>
-        </tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Difficulty)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Time)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Update", new { id = item.WorkoutId }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.WorkoutId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.WorkoutId })|
+                    @Html.ActionLink("View Exercise", "ViewExercise", new { id = item.WorkoutId })|
+                    @Html.ActionLink("Add Exercise", "CreateExercise", new { WorkoutId = item.WorkoutId })
+
+                </td>
+
+            </tr>
         }
     </tbody>
 </table>
