@@ -21,6 +21,9 @@ This project main objective was to create a CRUD application that utilises the t
 * MySQL - version 2.0
 * ASP.NET- version 3.0
 
+## Entity Relationship Diagram (ERD)
+
+
 ## Setup
 Describe how to install / setup your local environement / add link to demo version.
 
