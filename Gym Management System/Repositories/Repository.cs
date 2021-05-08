@@ -17,7 +17,7 @@ namespace GymManagementSystem.Repositories
         //give constructor
         public Repository (AppDbContext repositoryContext)
         {
-            repositoryContext = repositoryContext;
+            RepositoryContext = repositoryContext;
         }
 
         public T Create (T entity)

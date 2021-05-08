@@ -2,7 +2,56 @@
     ViewData["Title"] = "Home Page";
 }
 
+</nav>
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+    <br/>
+    <br/>
+
+    <h1 class="display-4">Welcome to your Gym Tracker</h1>
+
+    <br/>
+
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="btn btn-info" asp-area="" asp-controller="Workout" asp-action="Create"> Create Workout</a>
+                <a class="btn btn-info" asp-area="" asp-controller="Workout" asp-action="Index"> View Workouts</a>
+   
+                @*<a class="btn btn-info" asp-area="" asp-controller="EventTypes" asp-action="Index">View all Events</a>
+        <a class="btn btn-info" asp-area="" asp-controller="EventTypes" asp-action="Create">Create EventType</a>*@
+
+
+                <br />
+                <br />
+                <br />
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="thumbnail">
+                            <a href="https://th.bing.com/th/id/OIP.eplrqvp5HAhaiIh_kE7ALwHaE8?w=241&h=180&c=7&o=5&dpr=1.5&pid=1.7">
+                                <img src="https://th.bing.com/th/id/OIP.eplrqvp5HAhaiIh_kE7ALwHaE8?w=241&h=180&c=7&o=5&dpr=1.5&pid=1.7" alt="Lights" style="width:100%">
+
+                            </a>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-4">
+                        <div class="thumbnail">
+                            <a href="https://th.bing.com/th/id/OIP.eplrqvp5HAhaiIh_kE7ALwHaE8?w=241&h=180&c=7&o=5&dpr=1.5&pid=1.7">
+                                <img src="https://th.bing.com/th/id/OIP.eplrqvp5HAhaiIh_kE7ALwHaE8?w=241&h=180&c=7&o=5&dpr=1.5&pid=1.7" alt="Nature" style="width:100%">
+
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="thumbnail">
+                            <a href="https://th.bing.com/th/id/OIP.eplrqvp5HAhaiIh_kE7ALwHaE8?w=241&h=180&c=7&o=5&dpr=1.5&pid=1.7">
+                                <img src="https://th.bing.com/th/id/OIP.eplrqvp5HAhaiIh_kE7ALwHaE8?w=241&h=180&c=7&o=5&dpr=1.5&pid=1.7" alt="Fjords" style="width:100%">
+
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>

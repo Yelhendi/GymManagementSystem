@@ -19,12 +19,6 @@ namespace GymManagementSystem.Models.Binding
 
         public virtual List<Workout> Workouts { get; set; }
     }
-    public enum Difficulty
-    {
-        Beginner = 1,
-        Intermediate,
-        Advanced
-    }
 
 
 

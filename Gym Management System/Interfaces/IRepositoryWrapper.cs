@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace GymManagementSystem.Interfaces
 {
-    interface IRepositoryWrapper
+    public interface IRepositoryWrapper
     {
         IExerciseRepository Exercises { get; }
         IWorkoutRepository Workouts { get; }

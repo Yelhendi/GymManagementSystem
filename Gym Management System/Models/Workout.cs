@@ -14,6 +14,7 @@ namespace GymManagementSystem.Models
         public Difficulty Difficulty { get; set; }
         public int Time { get; set; }
         public DateTime CreatedAt { get; set; }
+      
         //Relationships
        
 
@@ -21,13 +22,10 @@ namespace GymManagementSystem.Models
 
         public virtual List<Workout> Workouts { get; set; }
 
-        
-    }
-    public enum Difficulty
-    {
-        Beginner = 1,
-        Intermediate,
-        Advanced
+        public object ToList()
+        {
+            throw new NotImplementedException();
+        }
     }
 
 

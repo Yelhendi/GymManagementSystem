@@ -24,11 +24,6 @@ namespace GymManagementSystem.Models.Binding
 
         public virtual Workout Workout { get; set; }
     }
-    public enum Status
-    {
-        Completed = 1,
-        Incomplete
-    }
 
 
 }

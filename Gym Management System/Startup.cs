@@ -1,4 +1,6 @@
 using GymManagementSystem.Data;
+using GymManagementSystem.Interfaces;
+using GymManagementSystem.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -28,6 +30,7 @@ namespace GymManagementSystem
             var myConnectionString = Configuration.GetConnectionString("DefaultServer");
             services.AddDbContext<AppDbContext>(options => options.UseMySql(myConnectionString, ServerVersion.AutoDetect(myConnectionString)));
             services.AddControllersWithViews();
+            services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

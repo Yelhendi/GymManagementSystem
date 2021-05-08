@@ -3,6 +3,7 @@ using System.Linq;
 using GymManagementSystem.Models;
 using GymManagementSystem.Data;
 using GymManagementSystem.Models.Binding;
+using GymManagementSystem.Interfaces;
 
 namespace GymManagementSystem.Controllers
 {
@@ -12,10 +13,12 @@ namespace GymManagementSystem.Controllers
     {
         //Inject applicationdb context readonly means it will not change
         //Create constructor
-        private readonly AppDbContext dbContext;
-        public ExerciseController(AppDbContext appDbContext)
+        //private readonly AppDbContext dbContext;
+        private IRepositoryWrapper repository;
+        public ExerciseController(/*AppDbContext appDbContext*/ IRepositoryWrapper repositoryWrapper)
         {
-            dbContext = appDbContext;
+            //dbContext = appDbContext;
+            repository = repositoryWrapper;
         }
 
         //READ
@@ -23,7 +26,8 @@ namespace GymManagementSystem.Controllers
 
         public IActionResult Index()
         {
-            var allExercises = dbContext.Exercises.ToList();
+            var allExercises = repository.Exercises.FindAll();
+           // var allExercises = dbContext.Exercises.ToList();
             return View(allExercises);
         }
         //Route is a placeholder that maps directly to what you are putting in
@@ -33,7 +37,8 @@ namespace GymManagementSystem.Controllers
         //goes to get Exercise that has specific Id
         public IActionResult Details(int id)
         {
-            var exerciseById = dbContext.Exercises.FirstOrDefault(w => w.ExerciseId == id);
+            var exerciseById = repository.Exercises.FindByCondition(w => w.ExerciseId == id).FirstOrDefault();
+           // var exerciseById = dbContext.Exercises.FirstOrDefault(w => w.ExerciseId == id);
             return View(exerciseById);
         }
 
@@ -43,7 +48,8 @@ namespace GymManagementSystem.Controllers
         ////UPDATE remember to pass in id
         public IActionResult Update(int id)
         {
-            var ExerciseById = dbContext.Exercises.FirstOrDefault(w => w.ExerciseId == id);
+            var ExerciseById = repository.Exercises.FindByCondition(w => w.ExerciseId == id).FirstOrDefault();
+            //var ExerciseById = dbContext.Exercises.FirstOrDefault(w => w.ExerciseId == id);
             return View(ExerciseById);
         }
 
@@ -51,14 +57,16 @@ namespace GymManagementSystem.Controllers
         [Route("update/{id:int}")]
         public IActionResult Update(Exercise exercise, int id)
         {
-            var ExerciseToUpdate = dbContext.Exercises.FirstOrDefault(w => w.ExerciseId == id);
+            var ExerciseToUpdate = repository.Exercises.FindByCondition(w => w.ExerciseId == id).FirstOrDefault();
+            //var ExerciseToUpdate = dbContext.Exercises.FirstOrDefault(w => w.ExerciseId == id);
             ExerciseToUpdate.Name = exercise.Name;
             ExerciseToUpdate.Picture = exercise.Picture;
             ExerciseToUpdate.Sets = exercise.Sets;
             ExerciseToUpdate.Weight = exercise.Weight;
             ExerciseToUpdate.Status = exercise.Status;
 
-            dbContext.SaveChanges();
+            repository.Save();
+            //dbContext.SaveChanges();
             return RedirectToAction("Index");
 
         }
@@ -67,9 +75,12 @@ namespace GymManagementSystem.Controllers
         [Route("delete/{id:int}")]
         public IActionResult Delete(int id)
         {
-            var ExerciseToDelete = dbContext.Exercises.FirstOrDefault(w => w.ExerciseId == id);
-            dbContext.Exercises.Remove(ExerciseToDelete);
-            dbContext.SaveChanges();
+            var ExerciseToDelete = repository.Exercises.FindByCondition(w => w.ExerciseId == id).FirstOrDefault();
+            //var ExerciseToDelete = dbContext.Exercises.FirstOrDefault(w => w.ExerciseId == id);
+            repository.Exercises.Delete(ExerciseToDelete);
+            //dbContext.Exercises.Remove(ExerciseToDelete);
+            repository.Save();
+            //dbContext.SaveChanges();
             return RedirectToAction("Index");
         }
 
