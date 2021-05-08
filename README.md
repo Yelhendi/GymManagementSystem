@@ -21,8 +21,13 @@ This project main objective was to create a CRUD application that utilises the t
 * MySQL - version 2.0
 * ASP.NET- version 3.0
 
-## Entity Relationship Diagram (ERD)
+### Architecture 
+### Database structure
+The Image below shows an Entity Relationship Diagram(ERD) with a many-to-many relationship between workouts and exercises. This means the the user can create workouts and add many exercises to the database with only one workout type. When observing this the other way, many workouts can be associated with one exercise. The diagram shows everything that has been implemented into my SQL database.
+![image](https://user-images.githubusercontent.com/64641730/117540080-55752e00-b005-11eb-874c-15e2a7a227eb.png)
 
+## Trello Board
+![image](https://user-images.githubusercontent.com/64641730/117541103-3b8a1a00-b00a-11eb-9fe1-a3da7d3a9857.png)
 
 ## Setup
 Describe how to install / setup your local environement / add link to demo version.
