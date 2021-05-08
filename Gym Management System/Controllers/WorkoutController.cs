@@ -135,7 +135,7 @@ namespace GymManagementSystem.Controllers
             {
                 WorkoutId = WorkoutId,
                 Name = bindingModel.Name,
-                Picture = "https://cdn.thespaces.com/wp-content/uploads/2020/01/Gymshark-hero-crop.jpg",
+                Picture = "https://th.bing.com/th/id/OIP.2iLBZwkqhpyU78pfAZfRLQHaHa?w=192&h=192&c=7&o=5&dpr=1.5&pid=1.7",
                 Sets = bindingModel.Sets,
                 Weight = bindingModel.Weight,
                 Status = (Models.Status)bindingModel.Status,
