@@ -76,43 +76,10 @@ The edit button allows you to update the data you have inputted.
 
 ## Code Examples
 Show examples of usage:
-* This code shows is to enable the create, delete and edit function for workouts.
+* This code shows is to enable the create function for workouts.
 
-` [Route("update/{id:int}")]
-        public IActionResult Update(int id)
-        {
-            var workoutById = repository.Workouts.FindByCondition(w => w.WorkoutId == id).FirstOrDefault();
-            return View(workoutById);
-        }
+`       
 
-        [HttpPost] //editing  data 
-        [Route("update/{id:int}")]
-        public IActionResult Update(Workout workout, int id)
-        {
-            var workoutToUpdate = repository.Workouts.FindByCondition(w => w.WorkoutId == id).FirstOrDefault()
-            workoutToUpdate.Type = workout.Type;
-            workoutToUpdate.Difficulty = workout.Difficulty;
-            workoutToUpdate.Time = workout.Time;
-            repository.Save();
-            return RedirectToAction("Index");
-        }
-        
-
-[Route("delete/{id:int}")]
-        public IActionResult Delete(int id)
-        {
-            var workoutToDelete = repository.Workouts.FindByCondition(w => w.WorkoutId == id).FirstOrDefault()
-            repository.Workouts.Delete(workoutToDelete);
-            repository.Save();
-            return RedirectToAction("Index");
-        }
-        
- 
- [Route("create")]
-        public IActionResult Create()
-        {
-            return View();
-        }
 
         [HttpPost("create")] //sending data 
         public IActionResult Create(AddWorkoutBindingModel bindingModel)
@@ -128,8 +95,9 @@ Show examples of usage:
             repository.Workouts.Create(workoutToCreate);
             repository.Save();
             return RedirectToAction("Index");
-        }     
-   `
+        }  
+  `
+   
         
 
 ## Features
