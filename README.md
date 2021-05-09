@@ -7,6 +7,7 @@
 * [Architecture](#architecture)
    * [Project Tracking](#project-tracking)
 * [Risk assessment](#risk-assessment)
+* [Coverage Report](#coverage-report)
 * [Setup](#setup)
 * [Features](#features)
 * [Status](#status)
@@ -47,12 +48,89 @@ The screen shot below shows the risk assessment of the app, possible risks that 
 
 ![image](https://user-images.githubusercontent.com/64641730/117568563-e0633080-b0b8-11eb-9888-40c24e205868.png)
 
+## Coverage Report
+The screen shot below shows the converage report of my app. The coverage is 4.4% this is significantly low than the value which was required. The tests consisted of repository testing and MOQ testing. The controllers were tested this included the delete, update, details and view. Integration testing was used to test the features of the code. This allows us to test the main CRUD features in sequence and requires no data dependencies which means this test can be run against a blank database. The data it needs will be constructed through assertions.
+
+To improve the coverage report I would have to remove dead or unreachable code. The delete button seems to have not been tested properly this is because Iwas unable to pasrse the correct value.
+
+![image](https://user-images.githubusercontent.com/64641730/117569882-a3e70300-b0bf-11eb-805c-2190318d01f3.png)
+
 ## Setup
-Describe how to install / setup your local environement / add link to demo version.
+To use the website firstly load the homepage. The homepage contains the two buttons these are create workout and view workouts. Firstly click on create workouts.
+![image](https://user-images.githubusercontent.com/64641730/117573028-b36d4880-b0cd-11eb-9415-fa08a4df39cb.png)
+
+Once the button is clicked fill in the form to include all the details of your workout. Click save once done.
+![image](https://user-images.githubusercontent.com/64641730/117573119-21b20b00-b0ce-11eb-8e33-62133dacaa97.png)
+
+Once saved it will take you to an Index page. This page shows you the workout you have just inputted.
+![image](https://user-images.githubusercontent.com/64641730/117573160-5d4cd500-b0ce-11eb-937f-c814405a83dd.png)
+
+Click on Add exercise to add an exercise for the workout and input data into this form.
+![image](https://user-images.githubusercontent.com/64641730/117573219-91c09100-b0ce-11eb-8896-625b2d6b5680.png)
+
+This will take you to the index page where you are able to view your exercises.
+![image](https://user-images.githubusercontent.com/64641730/117573267-dc420d80-b0ce-11eb-855f-ce993917bcba.png)
+
+You are able to click the delete button to remove the exercise. There is also the delete button on the workout list that enables you to delete the workout. 
+The edit button allows you to update the data you have inputted. 
 
 ## Code Examples
 Show examples of usage:
-`put-your-code-here`
+* This code shows is to enable the create, delete and edit function for workouts.
+
+` [Route("update/{id:int}")]
+        public IActionResult Update(int id)
+        {
+            var workoutById = repository.Workouts.FindByCondition(w => w.WorkoutId == id).FirstOrDefault();
+            return View(workoutById);
+        }
+
+        [HttpPost] //editing  data 
+        [Route("update/{id:int}")]
+        public IActionResult Update(Workout workout, int id)
+        {
+            var workoutToUpdate = repository.Workouts.FindByCondition(w => w.WorkoutId == id).FirstOrDefault()
+            workoutToUpdate.Type = workout.Type;
+            workoutToUpdate.Difficulty = workout.Difficulty;
+            workoutToUpdate.Time = workout.Time;
+            repository.Save();
+            return RedirectToAction("Index");
+        }
+        
+
+[Route("delete/{id:int}")]
+        public IActionResult Delete(int id)
+        {
+            var workoutToDelete = repository.Workouts.FindByCondition(w => w.WorkoutId == id).FirstOrDefault()
+            repository.Workouts.Delete(workoutToDelete);
+            repository.Save();
+            return RedirectToAction("Index");
+        }
+        
+ 
+ [Route("create")]
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost("create")] //sending data 
+        public IActionResult Create(AddWorkoutBindingModel bindingModel)
+        {
+            var workoutToCreate = new Workout
+            {
+                Type = bindingModel.Type,
+                Difficulty = (Models.Difficulty)bindingModel.Difficulty,
+                Time = bindingModel.Time,
+                CreatedAt = DateTime.Now
+            };
+
+            repository.Workouts.Create(workoutToCreate);
+            repository.Save();
+            return RedirectToAction("Index");
+        }     
+   `
+        
 
 ## Features
 List of the main features ready and TODOs for future development
