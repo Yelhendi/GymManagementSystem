@@ -25,7 +25,6 @@ This project main objective was to create a CRUD application that utilises the t
 ### Database structure
 The Image below shows an Entity Relationship Diagram(ERD) with a many-to-many relationship between workouts and exercises. This means the the user can create workouts and add many exercises to the database with only one workout type. When observing this the other way, many workouts can be associated with one exercise. The diagram shows everything that has been implemented into my SQL database.
 
-
 ![image](https://user-images.githubusercontent.com/64641730/117540080-55752e00-b005-11eb-874c-15e2a7a227eb.png)
 
 ## Project Tracking
@@ -49,11 +48,23 @@ The screen shot below shows the risk assessment of the app, possible risks that 
 ![image](https://user-images.githubusercontent.com/64641730/117568563-e0633080-b0b8-11eb-9888-40c24e205868.png)
 
 ## Coverage Report
-The screen shot below shows the converage report of my app. The coverage is 4.4% this is significantly low than the value which was required. The tests consisted of repository testing and MOQ testing. The controllers were tested this included the delete, update, details and view. Integration testing was used to test the features of the code. This allows us to test the main CRUD features in sequence and requires no data dependencies which means this test can be run against a blank database. The data it needs will be constructed through assertions.
+The screen shot below shows the converage report of my app. The coverage is 4.4% this is significantly low than the value which was required. The tests consisted of repository testing and MOQ testing. The controllers were tested this included the delete, update, details and view. Integration testing was used to test the features of the code. This allows us to test the main CRUD features in sequence and requires no data dependencies which means this test can be run against a blank database, the data it needs will be constructed through assertions.
 
-To improve the coverage report I would have to remove dead or unreachable code. The delete button seems to have not been tested properly this is because Iwas unable to pasrse the correct value.
+To improve the coverage report I would have to remove dead or unreachable code. 
 
 ![image](https://user-images.githubusercontent.com/64641730/117569882-a3e70300-b0bf-11eb-805c-2190318d01f3.png)
+
+The exercise controller shows that the following buttons worked which were, index, Update and delete however the details button was not working. 
+
+![image](https://user-images.githubusercontent.com/64641730/117620637-92a60100-b168-11eb-920f-49f1a1633ed6.png)
+
+The Workout controller shows that after undergoing testing the test for details and create did not work.
+
+![image](https://user-images.githubusercontent.com/64641730/117621015-08aa6800-b169-11eb-8d98-6070daecec1b.png)
+
+## Deployment
+The app was deployed by creating a web app service on Microsoft Azure. This was then connected to GitHub. The link to the website is: https://gymwebapp.azurewebsites.net 
+
 
 ## Setup
 To use the website firstly load the homepage. The homepage contains the two buttons these are create workout and view workouts. Firstly click on create workouts.
@@ -114,6 +125,7 @@ To-do list:
 * To contain a search bar where you can search the website
 * To contain a log in system where users can make an account
 * To contain a location system to give you gyms that are near you in the area.
+* Change the layout of the website to make it more visually appealing
 
 ## Status
 Project is: _in progress_ as I want to try and add on extra features to imporve the project.
