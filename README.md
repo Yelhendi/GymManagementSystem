@@ -9,6 +9,7 @@
 * [Risk assessment](#risk-assessment)
 * [Coverage Report](#coverage-report)
 * [Setup](#setup)
+* [Deployment](#deployment)
 * [Features](#features)
 * [Status](#status)
 * [Contact](#contact)
